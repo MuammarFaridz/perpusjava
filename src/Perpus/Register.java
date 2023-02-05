@@ -86,6 +86,7 @@ public class Register extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         btncanc = new javax.swing.JButton();
         TxId = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1250, 750));
@@ -130,7 +131,7 @@ public class Register extends javax.swing.JFrame {
 
         TxUname.setFont(new java.awt.Font("Montserrat Medium", 0, 12)); // NOI18N
         TxUname.setForeground(new java.awt.Color(41, 50, 65));
-        TxUname.setPreferredSize(new java.awt.Dimension(330, 40));
+        TxUname.setPreferredSize(new java.awt.Dimension(450, 40));
         TxUname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TxUnameActionPerformed(evt);
@@ -157,7 +158,7 @@ public class Register extends javax.swing.JFrame {
 
         Txnama.setFont(new java.awt.Font("Montserrat Medium", 0, 12)); // NOI18N
         Txnama.setForeground(new java.awt.Color(41, 50, 65));
-        Txnama.setPreferredSize(new java.awt.Dimension(400, 40));
+        Txnama.setPreferredSize(new java.awt.Dimension(450, 40));
         Txnama.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TxnamaActionPerformed(evt);
@@ -177,7 +178,7 @@ public class Register extends javax.swing.JFrame {
         txalamat.setFont(new java.awt.Font("Montserrat Medium", 0, 12)); // NOI18N
         txalamat.setForeground(new java.awt.Color(41, 50, 65));
         txalamat.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        txalamat.setPreferredSize(new java.awt.Dimension(400, 40));
+        txalamat.setPreferredSize(new java.awt.Dimension(450, 80));
         txalamat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txalamatActionPerformed(evt);
@@ -186,7 +187,7 @@ public class Register extends javax.swing.JFrame {
 
         txumur.setFont(new java.awt.Font("Montserrat Medium", 0, 12)); // NOI18N
         txumur.setForeground(new java.awt.Color(41, 50, 65));
-        txumur.setPreferredSize(new java.awt.Dimension(400, 40));
+        txumur.setPreferredSize(new java.awt.Dimension(100, 40));
         txumur.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txumurActionPerformed(evt);
@@ -195,18 +196,19 @@ public class Register extends javax.swing.JFrame {
 
         txjurusan.setFont(new java.awt.Font("Montserrat Medium", 0, 12)); // NOI18N
         txjurusan.setForeground(new java.awt.Color(41, 50, 65));
-        txjurusan.setPreferredSize(new java.awt.Dimension(400, 40));
+        txjurusan.setPreferredSize(new java.awt.Dimension(450, 40));
         txjurusan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txjurusanActionPerformed(evt);
             }
         });
 
-        btnreg.setBackground(new java.awt.Color(125, 220, 211));
+        btnreg.setBackground(new java.awt.Color(46, 196, 182));
         btnreg.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
         btnreg.setForeground(new java.awt.Color(255, 255, 255));
         btnreg.setText("Register");
         btnreg.setBorder(null);
+        btnreg.setPreferredSize(new java.awt.Dimension(450, 40));
         btnreg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnregActionPerformed(evt);
@@ -282,7 +284,7 @@ public class Register extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addComponent(txalamat, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
-                .addComponent(btnreg, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnreg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jLabel2.setFont(new java.awt.Font("Montserrat SemiBold", 0, 12)); // NOI18N
@@ -307,14 +309,14 @@ public class Register extends javax.swing.JFrame {
             }
         });
 
+        jLabel11.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 36)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(41, 50, 65));
+        jLabel11.setText("Register.");
+
         javax.swing.GroupLayout BGLayout = new javax.swing.GroupLayout(BG);
         BG.setLayout(BGLayout);
         BGLayout.setHorizontalGroup(
             BGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BGLayout.createSequentialGroup()
-                .addContainerGap(401, Short.MAX_VALUE)
-                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(393, Short.MAX_VALUE))
             .addGroup(BGLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(btncanc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -322,17 +324,25 @@ public class Register extends javax.swing.JFrame {
                 .addComponent(TxId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 282, Short.MAX_VALUE)
+                .addGroup(BGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(BGLayout.createSequentialGroup()
+                        .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
+                        .addGap(509, 509, 509))
+                    .addGroup(BGLayout.createSequentialGroup()
+                        .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(393, Short.MAX_VALUE))))
         );
         BGLayout.setVerticalGroup(
             BGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BGLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addGroup(BGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btncanc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(BGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btncanc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(BGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(TxId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel2)))
+                        .addComponent(jLabel2))
+                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(65, 65, 65))
@@ -487,6 +497,7 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JButton btncanc;
     private javax.swing.JButton btnreg;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

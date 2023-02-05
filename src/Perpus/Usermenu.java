@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 /**
@@ -53,6 +55,8 @@ public class Usermenu extends javax.swing.JFrame {
         }
     }
     
+    
+    
     public Usermenu() {
         initComponents();
          model = new DefaultTableModel();
@@ -67,6 +71,9 @@ public class Usermenu extends javax.swing.JFrame {
         model.addColumn("jumlah");
         
         loadData();
+        JPanel panel = new JPanel();
+        panel.setFocusable(false);
+        panel.requestFocus();
     }
 
     /**
@@ -96,7 +103,7 @@ public class Usermenu extends javax.swing.JFrame {
         BG.setPreferredSize(new java.awt.Dimension(1250, 750));
 
         jPanel1.setBackground(new java.awt.Color(46, 196, 182));
-        jPanel1.setPreferredSize(new java.awt.Dimension(357, 70));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1250, 70));
 
         userlabel.setFont(new java.awt.Font("Montserrat SemiBold", 1, 14)); // NOI18N
         userlabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -131,16 +138,16 @@ public class Usermenu extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(15, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(userlabel)))
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(15, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(userlabel)
+                .addGap(25, 25, 25))
         );
 
         jPinjam.setBackground(new java.awt.Color(255, 159, 28));
-        jPinjam.setFont(new java.awt.Font("Montserrat SemiBold", 0, 12)); // NOI18N
+        jPinjam.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
         jPinjam.setForeground(new java.awt.Color(255, 255, 255));
         jPinjam.setText("Pinjam");
         jPinjam.setBorder(null);
@@ -152,7 +159,7 @@ public class Usermenu extends javax.swing.JFrame {
         });
 
         jRiwayat.setBackground(new java.awt.Color(255, 159, 28));
-        jRiwayat.setFont(new java.awt.Font("Montserrat SemiBold", 0, 12)); // NOI18N
+        jRiwayat.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
         jRiwayat.setForeground(new java.awt.Color(255, 255, 255));
         jRiwayat.setText("Riwayat");
         jRiwayat.setBorder(null);
@@ -164,7 +171,7 @@ public class Usermenu extends javax.swing.JFrame {
         });
 
         editprof.setBackground(new java.awt.Color(255, 159, 28));
-        editprof.setFont(new java.awt.Font("Montserrat SemiBold", 0, 12)); // NOI18N
+        editprof.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
         editprof.setForeground(new java.awt.Color(255, 255, 255));
         editprof.setText("Edit");
         editprof.setBorder(null);
@@ -176,7 +183,7 @@ public class Usermenu extends javax.swing.JFrame {
         });
 
         jLogOut.setBackground(new java.awt.Color(255, 159, 28));
-        jLogOut.setFont(new java.awt.Font("Montserrat SemiBold", 0, 12)); // NOI18N
+        jLogOut.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
         jLogOut.setForeground(new java.awt.Color(255, 255, 255));
         jLogOut.setText("Log out");
         jLogOut.setBorder(null);
@@ -187,10 +194,12 @@ public class Usermenu extends javax.swing.JFrame {
             }
         });
 
+        jScrollPane1.setForeground(new java.awt.Color(41, 50, 65));
         jScrollPane1.setFont(new java.awt.Font("Montserrat SemiBold", 0, 12)); // NOI18N
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(452, 525));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(452, 565));
 
-        data_buku.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        data_buku.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+        data_buku.setForeground(new java.awt.Color(41, 50, 65));
         data_buku.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -202,6 +211,7 @@ public class Usermenu extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        data_buku.setPreferredSize(new java.awt.Dimension(452, 565));
         data_buku.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 data_bukuMouseClicked(evt);
@@ -209,6 +219,17 @@ public class Usermenu extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(data_buku);
 
+        txFind.setFont(new java.awt.Font("Montserrat Medium", 0, 12)); // NOI18N
+        txFind.setForeground(new java.awt.Color(41, 50, 65));
+        txFind.setText("Cari judul buku disini");
+        txFind.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txFindFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txFindFocusLost(evt);
+            }
+        });
         txFind.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txFindActionPerformed(evt);
@@ -227,7 +248,7 @@ public class Usermenu extends javax.swing.JFrame {
         BG.setLayout(BGLayout);
         BGLayout.setHorizontalGroup(
             BGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1250, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(BGLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(jPinjam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -249,7 +270,7 @@ public class Usermenu extends javax.swing.JFrame {
             .addGroup(BGLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(23, 23, 23)
                 .addGroup(BGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(BGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jPinjam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -257,8 +278,8 @@ public class Usermenu extends javax.swing.JFrame {
                         .addComponent(editprof, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jRiwayat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txFind))
-                .addGap(44, 44, 44)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -382,6 +403,18 @@ public class Usermenu extends javax.swing.JFrame {
         }finally{
         }
     }//GEN-LAST:event_txFindKeyTyped
+
+    private void txFindFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txFindFocusGained
+        JTextField textField = (JTextField) evt.getSource();
+        textField.setText("");
+    }//GEN-LAST:event_txFindFocusGained
+
+    private void txFindFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txFindFocusLost
+        JTextField textField = (JTextField) evt.getSource();
+        if (textField.getText().isEmpty()) {
+            textField.setText("Cari buku disini");
+        }
+    }//GEN-LAST:event_txFindFocusLost
 
     /**
      * @param args the command line arguments
