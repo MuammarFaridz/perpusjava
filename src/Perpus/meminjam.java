@@ -3,15 +3,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Perpus;
+import com.formdev.flatlaf.FlatLightLaf;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.util.Date; 
+import javax.swing.UIManager;
 /**
  *
  * @author faridz
@@ -271,7 +274,6 @@ public class meminjam extends javax.swing.JFrame {
         unamelabel = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         data_keranjang = new javax.swing.JTable();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         txidker = new javax.swing.JTextField();
         btn_add1 = new javax.swing.JButton();
         jdlkrj = new javax.swing.JTextField();
@@ -281,6 +283,7 @@ public class meminjam extends javax.swing.JFrame {
         conf_btn = new javax.swing.JButton();
         backbtn = new javax.swing.JButton();
         txtrans = new javax.swing.JTextField();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -345,8 +348,6 @@ public class meminjam extends javax.swing.JFrame {
             }
         });
         jScrollPane2.setViewportView(data_keranjang);
-
-        jDateChooser1.setDateFormatString("yyyy-MM-dd");
 
         btn_add1.setText("ADD Date");
         btn_add1.addActionListener(new java.awt.event.ActionListener() {
@@ -425,14 +426,13 @@ public class meminjam extends javax.swing.JFrame {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(btn_add1))
-                            .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btn_del1))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btn_add1)
+                                    .addComponent(btn_del1)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(117, 117, 117)
                         .addComponent(conf_btn)))
@@ -458,9 +458,7 @@ public class meminjam extends javax.swing.JFrame {
                                     .addComponent(btn_add)
                                     .addGap(36, 36, 36))
                                 .addGroup(layout.createSequentialGroup()
-                                    .addGap(25, 25, 25)
-                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
+                                    .addGap(61, 61, 61)
                                     .addComponent(btn_add1)
                                     .addGap(18, 18, 18)
                                     .addComponent(btn_del1)
@@ -486,7 +484,8 @@ public class meminjam extends javax.swing.JFrame {
                                     .addGap(18, 18, 18)
                                     .addComponent(txtrans, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
-                                    .addComponent(jdlkrj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(jdlkrj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(tglpkrj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -496,8 +495,6 @@ public class meminjam extends javax.swing.JFrame {
                     .addComponent(conf_btn))
                 .addContainerGap(132, Short.MAX_VALUE))
         );
-
-        jDateChooser1.getAccessibleContext().setAccessibleName("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -568,27 +565,21 @@ public class meminjam extends javax.swing.JFrame {
 
     private void btn_add1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_add1ActionPerformed
         // TODO add your handling code here:
-
-        
         String id = txidker.getText();
         Date date = new Date();
        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-         /*String tglp = formatter.format(jDateChooser1.getDate());
-        String tglk = formatter.format(date);*/
-        String uname= unamelabel.getText();
-        String jdl = jdlkrj.getText();
-        
-
                try{
-                   String strDate = formatter.format(jDateChooser1.getDate());
-        String datenow = formatter.format(date);
+            Calendar cal = Calendar.getInstance();
+            cal.add(Calendar.DAY_OF_WEEK,7);
+            String strDate= formatter.format(cal.getTime());
+            String datenow = formatter.format(date);
             Connection c = Koneksi.getKoneksi();
-            String sql = "UPDATE keranjang1 SET tanggal_pinjam = ? , tanggal_kembali = ? WHERE judul = ?";
+            String sql = "UPDATE keranjang1 SET tanggal_pinjam = ? , tanggal_kembali = ?  WHERE id_keranjang = ?";
             PreparedStatement p = c.prepareStatement(sql);
              
             p.setString(1, datenow);
             p.setString(2, strDate);
-            p.setString(3, jdl);
+            p.setString(3, id);
 
             p.executeUpdate();
             p.close();
@@ -736,29 +727,11 @@ public class meminjam extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(meminjam.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(meminjam.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(meminjam.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(meminjam.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
+        UIManager.setLookAndFeel( new FlatLightLaf() );
+    }catch( Exception ex ) {
+        System.err.println( "Failed to initialize LaF" );
+    }
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

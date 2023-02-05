@@ -4,10 +4,15 @@
  */
 package Perpus;
 
+import com.formdev.flatlaf.FlatLightLaf;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author faridz
@@ -17,11 +22,51 @@ public class Usermenu extends javax.swing.JFrame {
     Connection con;
     PreparedStatement pst;
     ResultSet rs;
-    /**
-     * Creates new form Menuuser
-     */
+    private DefaultTableModel model;
+    
+    public void loadData(){
+        model.getDataVector().removeAllElements();
+        model.fireTableDataChanged();
+        
+        try{
+            Connection c = Koneksi.getKoneksi();
+            Statement s = c.createStatement();
+            
+            String sql = "SELECT * FROM buku";
+            ResultSet r = s.executeQuery(sql);
+            
+            while(r.next()){
+                Object[] o = new Object[6];
+                o [0] = r.getString("kode_buku");
+                o [1] = r.getString("judul");
+                o [2] = r.getString("pengarang");
+                o [3] = r.getString("penerbit");
+                o [4] = r.getString("tahun");
+                o [5] = r.getString("jumlah");
+                
+                model.addRow(o);
+            }
+            r.close();
+            s.close();
+        }catch(SQLException e){
+            System.out.println("terjadi kesalahan"+ e.getMessage());
+        }
+    }
+    
     public Usermenu() {
         initComponents();
+         model = new DefaultTableModel();
+        
+        data_buku.setModel(model);
+        
+        model.addColumn("Kode buku");
+        model.addColumn("judul");
+        model.addColumn("pengarang");
+        model.addColumn("penerbit");
+        model.addColumn("tahun");
+        model.addColumn("jumlah");
+        
+        loadData();
     }
 
     /**
@@ -33,123 +78,226 @@ public class Usermenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        BG = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         userlabel = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jPinjam = new javax.swing.JButton();
+        jRiwayat = new javax.swing.JButton();
         editprof = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jLogOut = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        data_buku = new javax.swing.JTable();
+        txFind = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 0, 0));
+        BG.setBackground(new java.awt.Color(255, 255, 255));
+        BG.setPreferredSize(new java.awt.Dimension(1250, 750));
 
+        jPanel1.setBackground(new java.awt.Color(46, 196, 182));
+        jPanel1.setPreferredSize(new java.awt.Dimension(357, 70));
+
+        userlabel.setFont(new java.awt.Font("Montserrat SemiBold", 1, 14)); // NOI18N
+        userlabel.setForeground(new java.awt.Color(255, 255, 255));
         userlabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         userlabel.setText("username");
 
-        editprof.setText("Edit");
-        editprof.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editprofActionPerformed(evt);
-            }
-        });
+        jPanel5.setPreferredSize(new java.awt.Dimension(40, 40));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 43, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 44, Short.MAX_VALUE)
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(userlabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(editprof)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(1101, 1101, 1101)
+                .addComponent(userlabel)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(userlabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(editprof))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(userlabel)))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
-        jButton1.setText("Meminjam");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jPinjam.setBackground(new java.awt.Color(255, 159, 28));
+        jPinjam.setFont(new java.awt.Font("Montserrat SemiBold", 0, 12)); // NOI18N
+        jPinjam.setForeground(new java.awt.Color(255, 255, 255));
+        jPinjam.setText("Pinjam");
+        jPinjam.setBorder(null);
+        jPinjam.setPreferredSize(new java.awt.Dimension(100, 40));
+        jPinjam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jPinjamActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Riwayat");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jRiwayat.setBackground(new java.awt.Color(255, 159, 28));
+        jRiwayat.setFont(new java.awt.Font("Montserrat SemiBold", 0, 12)); // NOI18N
+        jRiwayat.setForeground(new java.awt.Color(255, 255, 255));
+        jRiwayat.setText("Riwayat");
+        jRiwayat.setBorder(null);
+        jRiwayat.setPreferredSize(new java.awt.Dimension(100, 40));
+        jRiwayat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jRiwayatActionPerformed(evt);
             }
         });
+
+        editprof.setBackground(new java.awt.Color(255, 159, 28));
+        editprof.setFont(new java.awt.Font("Montserrat SemiBold", 0, 12)); // NOI18N
+        editprof.setForeground(new java.awt.Color(255, 255, 255));
+        editprof.setText("Edit");
+        editprof.setBorder(null);
+        editprof.setPreferredSize(new java.awt.Dimension(100, 40));
+        editprof.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editprofActionPerformed(evt);
+            }
+        });
+
+        jLogOut.setBackground(new java.awt.Color(255, 159, 28));
+        jLogOut.setFont(new java.awt.Font("Montserrat SemiBold", 0, 12)); // NOI18N
+        jLogOut.setForeground(new java.awt.Color(255, 255, 255));
+        jLogOut.setText("Log out");
+        jLogOut.setBorder(null);
+        jLogOut.setPreferredSize(new java.awt.Dimension(100, 40));
+        jLogOut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jLogOutActionPerformed(evt);
+            }
+        });
+
+        jScrollPane1.setFont(new java.awt.Font("Montserrat SemiBold", 0, 12)); // NOI18N
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(452, 525));
+
+        data_buku.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        data_buku.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        data_buku.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                data_bukuMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(data_buku);
+
+        txFind.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txFindActionPerformed(evt);
+            }
+        });
+        txFind.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txFindKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txFindKeyTyped(evt);
+            }
+        });
+
+        javax.swing.GroupLayout BGLayout = new javax.swing.GroupLayout(BG);
+        BG.setLayout(BGLayout);
+        BGLayout.setHorizontalGroup(
+            BGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1250, Short.MAX_VALUE)
+            .addGroup(BGLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jPinjam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addGroup(BGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(BGLayout.createSequentialGroup()
+                        .addComponent(jRiwayat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(145, 145, 145)
+                        .addComponent(txFind, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(editprof, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addComponent(jLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
+        );
+        BGLayout.setVerticalGroup(
+            BGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BGLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(BGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(BGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jPinjam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(editprof, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jRiwayat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txFind))
+                .addGap(44, 44, 44)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(79, 79, 79)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
-                .addGap(0, 151, Short.MAX_VALUE))
+                .addComponent(BG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(82, 82, 82)
-                        .addComponent(jButton1)))
-                .addGap(59, 59, 59)
-                .addComponent(jButton2)
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addComponent(BG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jPinjamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPinjamActionPerformed
         // TODO add your handling code here:
         String show= userlabel.getText();
         meminjam a = new meminjam();
         a.unamelabel.setText(show);
         a.setVisible(true);
+        a.setLocationRelativeTo(null);
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jPinjamActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jRiwayatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRiwayatActionPerformed
         // TODO add your handling code here:
         String show= userlabel.getText();
         historyuser a = new historyuser();
         a.userfield.setText(show);
         a.setVisible(true);
-        
-    }//GEN-LAST:event_jButton2ActionPerformed
+        a.setLocationRelativeTo(null);
+    }//GEN-LAST:event_jRiwayatActionPerformed
 
     private void editprofActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editprofActionPerformed
         // TODO add your handling code here:
@@ -179,35 +327,71 @@ public class Usermenu extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "", "ERROR", 1);
         }
         a.setVisible(true);
+        a.setLocationRelativeTo(null);
     }//GEN-LAST:event_editprofActionPerformed
+
+    private void jLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLogOutActionPerformed
+      int option = JOptionPane.showConfirmDialog(this, "Are you sure you want to log out?", "Confirm Log Out", JOptionPane.YES_NO_OPTION);
+        if (option == JOptionPane.YES_OPTION) {
+            new Login().setVisible(true);
+            this.dispose();
+    }
+    }//GEN-LAST:event_jLogOutActionPerformed
+
+    private void data_bukuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_data_bukuMouseClicked
+       
+    }//GEN-LAST:event_data_bukuMouseClicked
+
+    private void txFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txFindActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txFindActionPerformed
+
+    private void txFindKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txFindKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txFindKeyPressed
+
+    private void txFindKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txFindKeyTyped
+        DefaultTableModel tabel = new DefaultTableModel();
+
+        tabel.addColumn("Kode Buku");
+        tabel.addColumn("Judul");
+        tabel.addColumn("Pengarang");
+        tabel.addColumn("Penerbit");
+        tabel.addColumn("Tahun");
+        tabel.addColumn("Jumlah");
+
+        try{
+            Connection c = Koneksi.getKoneksi();
+            String sql = "Select * from buku where judul like '%" + txFind.getText() + "%'";
+            Statement stat = c.createStatement();
+            ResultSet rs = stat.executeQuery(sql);
+            while(rs.next()){
+                tabel.addRow(new Object[]{
+                    rs.getString(1),
+                    rs.getString(2),
+                    rs.getString(3),
+                    rs.getString(4),
+                    rs.getString(5),
+                    rs.getString(6),
+                });
+            }
+            data_buku.setModel(tabel);
+            loadData();
+        }catch(Exception e){
+            System.out.println("Cari Data Error");
+        }finally{
+        }
+    }//GEN-LAST:event_txFindKeyTyped
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Usermenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Usermenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Usermenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Usermenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
+       try {
+        UIManager.setLookAndFeel( new FlatLightLaf() );
+    }catch( Exception ex ) {
+        System.err.println( "Failed to initialize LaF" );
+    }
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -218,11 +402,16 @@ public class Usermenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel BG;
+    private javax.swing.JTable data_buku;
     private javax.swing.JButton editprof;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jLogOut;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JButton jPinjam;
+    private javax.swing.JButton jRiwayat;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField txFind;
     public static javax.swing.JLabel userlabel;
     // End of variables declaration//GEN-END:variables
 }
